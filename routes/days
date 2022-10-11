@@ -4,7 +4,7 @@ const { Pool } = require("pg")
 
 router.get("/days", (req, res) =>{
     const pool = new Pool({
-          day_id: 
+        
     })
 })
 
