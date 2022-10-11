@@ -1,0 +1,2 @@
+INSERT INTO interview (id, student, interviewer_id, appointment_id) VALUES (1, 'Umut Can Erbas', 1, 1);
+INSERT INTO interview (id, student, interviewer_id, appointment_id) VALUES (2, 'Nicolo Pasian', 1, 3);

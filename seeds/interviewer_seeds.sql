@@ -1,0 +1,1 @@
+INSERT INTO interviewer (id, name, avatar) VALUES (1, 'Arthur Di Lascio', 'url');

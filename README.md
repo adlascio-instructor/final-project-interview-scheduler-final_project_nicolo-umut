@@ -56,7 +56,7 @@ Any updates can be seen in real time.
 - Before you start coding, you need to prepare a few things:
 
   - Understand what data you need to store in the database
-  - Create an ERD diagram (Use [draw.io](https://www.draw.io/) and add it to your presentation)
+  - Create an ERD diagram (Use [draw.io](https:/Backedn/www.draw.io/) and add it to your presentation)
   - Decide what routes you need to create in the API server
   - Understand what data you need to fetch from the API server
   - Investigate how components will communicate with each other
