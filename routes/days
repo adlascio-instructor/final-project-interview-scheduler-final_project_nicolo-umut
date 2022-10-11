@@ -1,0 +1,11 @@
+const express = require("express");
+const router = express.Router();
+const { Pool } = require("pg")
+
+router.get("/days", (req, res) =>{
+    const pool = new Pool({
+          day_id: 
+    })
+})
+
+module.exports = router;
