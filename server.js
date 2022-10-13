@@ -4,6 +4,7 @@ const http = require("http");
 const socketIO = require("socket.io");
 const { Pool } = require("pg");
 const port = 8000;
+require('dotenv').config();
 
 const server = http.createServer(app);
 const io = socketIO(server);
@@ -32,8 +33,10 @@ const io = socketIO(server);
 //    });
 //  });
 
-app.get("/interview", (req, res) => {
-    const { appointment_id } = req.body;
+console.log('env', process.env.DB_NAME);
+
+app.get("/interview/:day", (req, res) => {
+   //  const { day } = req.body;
     const pool = new Pool ({
        name: process.env.DB_NAME, //username postgres
        host: process.env.DB_HOST, // localhost
@@ -42,14 +45,26 @@ app.get("/interview", (req, res) => {
        port: process.env.DB_PORT, // 5432 
     });
     pool   
-       .query("SELECT appointment_id FROM interview")
+       .query(`SELECT appointment.id AS appointment_id, appointment.time, interview.student,
+       interviewer.id AS interviewer_id, interviewer.name AS interviewer_name, interviewer.avatar AS interviewer_avatar FROM appointment
+       JOIN day
+       ON appointment.day_id = day.id
+       LEFT JOIN interview
+       ON appointment.id = interview.appointment_id
+       LEFT JOIN interviewer
+       ON interview.interviewer_id = interviewer.id
+       WHERE day.name = '${req.params.day}'
+       ORDER BY appointment.id;`)
        .then((result) => result.rows)
-       .then((interview) => res.json(interview))
-       .catch((err) => console.log("err"))
+       .then((schedule) => {
+         console.log(schedule);
+         res.json(schedule)})
+       .catch((err) => console.log("err", err))
        .finally(() => pool.end());        
 });
+// loop and create object from array, if the array doesnt have anything just pass empty data if its filled it should pass every data
 
-app.get("/interview", (req, res) => {
+app.get("/interviewer", (req, res) => {
     const pool = new Pool ({
        name: process.env.DB_NAME, //username postgres
        host: process.env.DB_HOST, // localhost
