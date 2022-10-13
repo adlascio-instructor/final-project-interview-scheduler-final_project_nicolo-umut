@@ -3,10 +3,13 @@ const app = express();
 const http = require("http");
 const socketIO = require("socket.io");
 const { Pool } = require("pg");
-const port = 8000;
-
+const port = 8080;
+const daysRouter = require(
+   './routes/days'
+)
 const server = http.createServer(app);
 const io = socketIO(server);
+app.use('/days',daysRouter)
 
 // io.on("connection", (socket) => {
 //    const { username, room } = socket.handshake.query;
