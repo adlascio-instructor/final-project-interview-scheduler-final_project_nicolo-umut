@@ -1,4 +1,3 @@
-
 CREATE TABLE day
     (id SERIAL PRIMARY KEY,
     name TEXT
