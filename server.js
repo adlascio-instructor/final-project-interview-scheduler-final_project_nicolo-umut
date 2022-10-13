@@ -8,29 +8,29 @@ const port = 8000;
 const server = http.createServer(app);
 const io = socketIO(server);
 
-io.on("connection", (socket) => {
-   const { username, room } = socket.handshake.query;
-   console.log("A client has connected", username);
-   socket.join(room);
-   io.to(room).emit("welcome_message", {
-     username: "Chat Bot",
-     text: `${username} joined`,
-     time: moment().format("hh:mm a"),
-   });
+// io.on("connection", (socket) => {
+//    const { username, room } = socket.handshake.query;
+//    console.log("A client has connected", username);
+//    socket.join(room);
+//    io.to(room).emit("welcome_message", {
+//      username: "Chat Bot",
+//      text: `${username} joined`,
+//      time: moment().format("hh:mm a"),
+//    });
  
-   socket.on("message", (message) => {
-     console.log("message in server", message);
-     io.to(room).emit("message", message);
-   });
+//    socket.on("message", (message) => {
+//      console.log("message in server", message);
+//      io.to(room).emit("message", message);
+//    });
  
-   socket.on("disconnect", () => {
-     console.log("A client has disconnected");
-     io.to(room).emit("message", {
-       username: "Chat Bot",
-       text: `${username} disconnected`,
-     });
-   });
- });
+//    socket.on("disconnect", () => {
+//      console.log("A client has disconnected");
+//      io.to(room).emit("message", {
+//        username: "Chat Bot",
+//        text: `${username} disconnected`,
+//      });
+//    });
+//  });
 
 app.get("/interview", (req, res) => {
     const { appointment_id } = req.body;
