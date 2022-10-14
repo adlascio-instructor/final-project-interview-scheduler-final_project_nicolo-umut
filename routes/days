@@ -24,14 +24,15 @@ router.get("/", (req, res) => {
       // console.log('days', days)
       const obj = {};
 
-      // days.forEach((element) => {
-      //   obj[element.name] = {
-      //     id: element.day_id,
-      //     name: element.name,
-      //     spots: Number(element.appointments) - Number(element.interviews),
-      //   };
-      // });
-      res.json(days);
+      days.forEach((element) => {
+        obj[element.name] = {
+          id: element.day_id,
+          name: element.name,
+          spots: Number(element.appointments) - Number(element.interviews),
+        };
+      });
+
+      res.json(obj);
     })
     .catch((err) => console.log("err", err))
     .finally(() => pool.end());
