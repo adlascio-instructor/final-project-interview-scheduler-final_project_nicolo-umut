@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import "./App.scss";
 
@@ -6,16 +6,17 @@ import DayList from "./components/DayList";
 import Appointment from "./components/Appointment";
 // import daysData from "./components/__mocks__/days.json";
 import appointmentsData from "./components/__mocks__/appointments.json";
+import axios from "axios";
 
 export default function Application() {
   const [day, setDay] = useState("Monday");
-  const [days, setDays] = useState(daysData);
+  const [days, setDays] = useState({});
   const [appointments, setAppointments] = useState(appointmentsData);
 
   useEffect(() => {
-    axios.get("../../routes/days").then((res) => {
+    axios.get("/days").then((res) => {
       console.log("get days data", res.data);
-      setCategories(res.data);
+      setDays(res.data);
     });
   }, []);
 
