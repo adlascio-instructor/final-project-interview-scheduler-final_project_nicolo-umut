@@ -100,7 +100,6 @@ For the client, you need to:
   - API Server - Schedule route
 
     - Get all interviews for a given day
-    - Get all interviewers
     - Get all available interviewers for a given day
 
   - Client - Schedule component
