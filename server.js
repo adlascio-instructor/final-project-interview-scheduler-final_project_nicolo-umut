@@ -3,7 +3,7 @@ const app = express();
 const http = require("http");
 const socketIO = require("socket.io");
 const { Pool } = require("pg");
-const port = 8080;
+const port = 8000;
 const daysRouter = require(
    './routes/days'
 )
