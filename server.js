@@ -57,8 +57,28 @@ app.get("/interview/:day", (req, res) => {
        ORDER BY appointment.id;`)
        .then((result) => result.rows)
        .then((schedule) => {
-         console.log(schedule);
-         res.json(schedule)})
+         // console.log(schedule);
+
+         const interviewObj = {};
+
+         schedule.forEach((element) => {
+            interviewObj[element.appointment_id] = {
+               id: element.appointment_id,
+               time: element.time,
+            }
+            if(element.student) {
+               interviewObj[element.appointment_id].interview = {
+                  student: element.student,
+                  interviewer: {
+                     id: element.interviewer_id,
+                     name: element.interviewer_name,
+                     avatar: element.interviewer_avatar
+                  }
+               }
+            } 
+         })
+         res.json(interviewObj);
+      })
        .catch((err) => console.log("err", err))
        .finally(() => pool.end());        
 });
