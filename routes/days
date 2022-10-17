@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { Pool } = require("pg");
 require("dotenv").config();
+
 router.get("/", (req, res) => {
   const pool = new Pool({
     name: process.env.DB_NAME,

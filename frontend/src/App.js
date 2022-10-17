@@ -11,7 +11,21 @@ import axios from "axios";
 export default function Application() {
   const [day, setDay] = useState("Monday");
   const [days, setDays] = useState({});
-  const [appointments, setAppointments] = useState(appointmentsData);
+  const [appointments, setAppointments] = useState({});
+
+  useEffect(() => {
+    axios.get("/interview").then((res) => {
+      console.log("get interview", res.data);
+      setAppointments(res.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    axios.get("/available_interview").then((res) => {
+      console.log("get available interviewer", res.data);
+      setAppointments(res.data);
+    });
+  }, []);
 
   useEffect(() => {
     axios.get("/days").then((res) => {
