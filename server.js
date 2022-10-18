@@ -13,6 +13,7 @@ const interviewrouter = require(
 const availableinterviewerrouter = require(
    './routes/available_interviewer'
 );
+const { getAppointment, getInterviewer, postAppointment, deleteAppointment, getFreeSpots } = require("./controllers/controller");
 require('dotenv').config();
 
 const server = http.createServer(app);
@@ -21,30 +22,11 @@ const io = socketIO(server);
 app.use('/interview', interviewrouter);
 app.use('/available_interviewer', availableinterviewerrouter);
 app.use('/days',daysRouter);
-
-// io.on("connection", (socket) => {
-//    const { username, room } = socket.handshake.query;
-//    console.log("A client has connected", username);
-//    socket.join(room);
-//    io.to(room).emit("welcome_message", {
-//      username: "Chat Bot",
-//      text: `${username} joined`,
-//      time: moment().format("hh:mm a"),
-//    });
- 
-//    socket.on("message", (message) => {
-//      console.log("message in server", message);
-//      io.to(room).emit("message", message);
-//    });
- 
-//    socket.on("disconnect", () => {
-//      console.log("A client has disconnected");
-//      io.to(room).emit("message", {
-//        username: "Chat Bot",
-//        text: `${username} disconnected`,
-//      });
-//    });
-//  });
+app.use('/controller.js', getInterviewer);
+app.use('/controller.js', getAppointment);
+app.use('/controller.js', postAppointment);
+app.use('/controller.js', deleteAppointment);
+app.use('/controller.js', getFreeSpots);
 
 console.log('env', process.env.DB_NAME);
 
