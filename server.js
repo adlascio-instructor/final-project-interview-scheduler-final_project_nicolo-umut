@@ -15,9 +15,24 @@ const availableinterviewerrouter = require(
 );
 const { getAppointment, getInterviewer, postAppointment, deleteAppointment, getFreeSpots } = require("./controllers/controller");
 require('dotenv').config();
+const io = require("socket.io")(8000, {
+   cors: {
+   },
+});
 
 const server = http.createServer(app);
-const io = socketIO(server);
+
+io.on("Connection", (socket) => {
+   console.log(socket.id);
+   socket.on("book-interview", (obj) => {
+      console.log(obj)
+      io.emit("book-interview", obj);
+   });
+
+   socket.on("cancel-interview", (data) => {
+      io.emit("cancel-interview", data);
+   });
+});
 
 app.use('/interview', interviewrouter);
 app.use('/available_interviewer', availableinterviewerrouter);

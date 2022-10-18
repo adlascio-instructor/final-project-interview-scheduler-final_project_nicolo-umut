@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { io } from "socket.io-client";
 
 import "./App.scss";
 
@@ -7,6 +8,7 @@ import Appointment from "./components/Appointment";
 // import daysData from "./components/__mocks__/days.json";
 import appointmentsData from "./components/__mocks__/appointments.json";
 import axios from "axios";
+import { Socket } from "socket.io";
 
 export default function Application() {
   const [day, setDay] = useState("Monday");
@@ -33,6 +35,12 @@ export default function Application() {
       setDays(res.data);
     });
   }, []);
+
+  // useEffect(() => {
+  //   socket.on("cancel-interview", (data) => {
+  //     const { appointment_id, day } data;
+  //   })
+  // })
 
   function bookInterview(id, interview) {
     console.log(id, interview);

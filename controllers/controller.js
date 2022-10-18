@@ -1,6 +1,5 @@
 const pool = require('../database');
-// const queries = require("./queries/available_interviewer"); doesnt work
-// const queries = require("./queries/interview"); doesnt work
+// const queries = require("./queries"); doesnt work
 
 const getInterviewer = (req, res) => {
     const weekDay = req.params.weekDay;
