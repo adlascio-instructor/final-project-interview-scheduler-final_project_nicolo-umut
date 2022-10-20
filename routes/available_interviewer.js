@@ -4,6 +4,7 @@ const { Pool } = require("pg");
 require("dotenv").config();
 
 router.get("/:day", (req, res) => {
+   console.log('route interviewers')
     const pool = new Pool ({
        name: process.env.DB_NAME, //username postgres
        host: process.env.DB_HOST, // localhost

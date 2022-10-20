@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
 
 import "./App.scss";
 
@@ -8,7 +8,7 @@ import Appointment from "./components/Appointment";
 // import daysData from "./components/__mocks__/days.json";
 import appointmentsData from "./components/__mocks__/appointments.json";
 import axios from "axios";
-import { Socket } from "socket.io";
+// import { Socket } from "socket.io";
 
 export default function Application() {
   const [day, setDay] = useState("Monday");
@@ -16,18 +16,13 @@ export default function Application() {
   const [appointments, setAppointments] = useState({});
 
   useEffect(() => {
-    axios.get("/interview").then((res) => {
+    axios.get(`/interview/${day.toUpperCase()}`).then((res) => {
       console.log("get interview", res.data);
       setAppointments(res.data);
     });
   }, []);
 
-  useEffect(() => {
-    axios.get("/available_interview").then((res) => {
-      console.log("get available interviewer", res.data);
-      setAppointments(res.data);
-    });
-  }, []);
+  
 
   useEffect(() => {
     axios.get("/days").then((res) => {
@@ -116,6 +111,7 @@ export default function Application() {
               bookInterview(appointment.id, interview)
             }
             cancelInterview={cancelInterview}
+            day={day}
           />
         ))}
         <Appointment key="last" time="5pm" />
